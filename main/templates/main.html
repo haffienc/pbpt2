@@ -1,7 +1,10 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <h1>Selamat Datang di {{ apps }}</h1>
+    <h1 class="text-dark bg-warning" style="font-size:50px;
+    font-style:italic; text-align:center;">{{ apps }}</h1>
+    <h1 class="text-warning" style="font-size:15px;
+    font-style:italic; text-align:center;">menyimpan barang yang tidak ada di kebanyakan rumah</h1>
 
     <h5>Name: </h5>
     <p>{{ name }}<p>
@@ -10,23 +13,30 @@
     <p>{{ class }}<p>
 
 <table>
-    <tr>
-        <th>Name</th>
-        <th>Price</th>
-        <th>amount</th>
-        <th>Description</th>
-        <th>Date Added</th>
-    </tr>
 
     {% comment %} Berikut cara memperlihatkan data produk di bawah baris ini {% endcomment %}
 
     {% for item in items %}
-        <tr>
-            <td>{{item.name}}</td>
-            <td>{{item.price}}</td>
-            <td>{{item.amount}}</td>
-            <td>{{item.description}}</td>
-            <td>{{item.date_added}}</td>
+        <tr class="card" style="width: 18rem;margin-bottom: 32px; background-color: #cbcb8c; ">
+            <div class="card-body:"></div>
+                <td class="text-dark bg-warning" class="card-title" style="font-size:25px;">{{item.name}}</td>
+                <td class="card-subtitle">Harga: {{item.price}}</td>
+                <td>Stok: {{item.amount}}</td>
+                <td class="card-text">{{item.description}}</td>
+                <td>{{item.date_added}}</td>
+                <td>
+                    <a href="{% url 'main:edit_item' item.pk %}" class="card-link">
+                        <button type="button" class="btn btn-warning">
+                            Edit
+                        </button>
+                    </a>
+                    <a href="{% url 'main:delete_item' item.pk %}" class="card-link">
+                        <button type="button" class="btn btn-warning">
+                            Delete
+                        </button>
+                    </a>
+                </td>
+            </div>
         </tr>
     {% endfor %}
 </table>
